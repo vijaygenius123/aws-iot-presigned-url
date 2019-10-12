@@ -10,7 +10,16 @@ provider:
   region: ap-south-1
 
 functions:
-  hello:
-    handler: handler.hello
+  iotPresignedUrl:
+    handler: src/iotPresignedUrl.handler
+    timeout: 30
     events:
-      - http: GET /
+      - http: OPTIONS /iot-presigned-url
+      - http:
+          method: GET
+          path: /iot-presigned-url
+    environment:
+      IOT_AWS_REGION: "<Your AWS region>"
+      IOT_ENDPOINT_HOST: "<Pick from AWS console IoT -> Settings -> Endpoint>"
+      IOT_ACCESS_KEY: "<Access key ID from iot-connector>"
+      IOT_SECRET_KEY: "<Secret access key from iot-connector>"
