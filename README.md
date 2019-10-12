@@ -78,6 +78,19 @@ To install serverless use the command below
             IOT_ACCESS_KEY: "<Access key ID from iot-connector>"
             IOT_SECRET_KEY: "<Secret access key from iot-connector>"
 
+8.  Add the below snippet in provider section so the lambda can access IoT
+
+        iamRoleStatements:
+                - Effect: "Allow"
+                Action:
+                        - "iot:Connect"
+                        - "iot:Publish"
+                        - "iot:Subscribe"
+                        - "iot:Receive"
+                        - "iot:GetThingShadow"
+                        - "iot:UpdateThingShadow"
+                Resource: "*"
+
 ## References
 
 1. https://docs.aws.amazon.com/iot/latest/developerguide/mqtt-ws.html
